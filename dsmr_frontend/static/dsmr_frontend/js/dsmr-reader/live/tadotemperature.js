@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-    var echarts_temperature_graph = echarts.init(document.getElementById('echarts-tadotemperature-graph'));
-    echarts_temperature_graph.showLoading('default', echarts_loading_options);
+    var echarts_tadotemperature_graph = echarts.init(document.getElementById('echarts-tadotemperature-graph'));
+    echarts_tadotemperature_graph.showLoading('default', echarts_loading_options);
 
     /* Init graph. */
-    $.get(echarts_temperature_graph_url, function (xhr_data) {
-        echarts_temperature_graph.hideLoading();
+    $.get(echarts_tadotemperature_graph_url, function (xhr_data) {
+        echarts_tadotemperature_graph.hideLoading();
 
         var option = {
             color: [
@@ -62,12 +62,12 @@ $(document).ready(function () {
                 }
             ]
         };
-        echarts_temperature_graph.setOption(option);
+        echarts_tadotemperature_graph.setOption(option);
     });
 
 
     /* Responsiveness. */
     $(window).resize(function () {
-        echarts_temperature_graph.resize();
+        echarts_tadotemperature_graph.resize();
     });
 });
