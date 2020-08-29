@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'dsmr_pvoutput.apps.PvoutputAppConfig',
     'dsmr_stats.apps.StatsAppConfig',
     'dsmr_weather.apps.WeatherAppConfig',
+    'dsmr_tado.apps.TadoAppConfig',
     'dsmr_influxdb.apps.DsmrInfluxdbConfig',
 )
 
