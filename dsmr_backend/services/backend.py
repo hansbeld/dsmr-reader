@@ -17,6 +17,10 @@ from dsmr_mqtt.models.queue import Message
 from dsmr_mqtt.models.settings.broker import MQTTBrokerSettings
 from dsmr_weather.models.reading import TemperatureReading
 from dsmr_weather.models.settings import WeatherSettings
+from dsmr_tado.models.reading import TemperatureReading as TadoTemperatureReading
+from dsmr_tado.models.settings import TadoSettings
+
+
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_backup.models.settings import BackupSettings, DropboxSettings
@@ -60,7 +64,8 @@ def get_capabilities(capability=None):
                 phase_power_current_l1__isnull=False,
             ).exists(),
             'gas': GasConsumption.objects.exists(),
-            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists()
+            'weather': WeatherSettings.get_solo().track and TemperatureReading.objects.exists(),
+            'tado': TadoSettings.get_solo().track and TadoTemperatureReading.objects.exists()
         }
 
         # Override capabilities when requested.
