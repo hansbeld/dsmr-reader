@@ -68,10 +68,10 @@ def get_temperature_from_api():
         logger.error('Buienradar: Failed reading temperature: HTTP %s', response.status_code)
         raise AssertionError(_('Unexpected status code received'))
 
-    dayresponse.json()['measuredData']['insideTemperature']['datapoints']
+    temperature = dayresponse.json()['measuredData']['insideTemperature']['datapoints'][-1]['value']['celsius']
 
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
-    return TemperatureReading.objects.create(read_at=hour_mark, degrees_celcius=Decimal('12'))
+    return TemperatureReading.objects.create(read_at=hour_mark, degrees_celcius=Decimal(temperature))
 
      
     # Find our selected station.
