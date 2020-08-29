@@ -141,6 +141,22 @@
         </div>
     </div>
     {% endif %}
+
+    {% if capabilities.tado %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    {% trans "Recent Tado temperatures" %}
+                </header>
+                <div class="panel-body">
+                    <div id="echarts-temperature-graph" style="width: 100%; height: 300px;"></div>
+                    <div class="graph_controls_help">{% blocktrans %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use the scrollbar/control below the graph.{% endblocktrans %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </section>
 {% endblock %}
 
@@ -233,6 +249,17 @@
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
 {% endif %}
  
+
+{% if capabilities.tado %}
+    <script type="text/javascript">
+        var echarts_temperature_graph_url = "{% url 'frontend:live-xhr-tadotemperature' %}";
+        var temperature_color = "{{ frontend_settings.temperature_color }}";
+    </script>
+    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
+{% endif %}
+
+
+
     <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
         var xhr_consumption_header_url = "{% url 'frontend:xhr-consumption-header' %}";
