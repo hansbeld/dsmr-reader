@@ -35,7 +35,7 @@ def get_capabilities(capability=None):
     Optionally returns a single capability when requested.
     """
     # Caching time should be limited, but enough to make it matter, as this call is used A LOT.
-    #capabilities = cache.get('capabilities')
+    capabilities = None #cache.get('capabilities')
 
     if capabilities is None:
         capabilities = {
