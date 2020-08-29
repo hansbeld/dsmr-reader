@@ -28,7 +28,6 @@ urlpatterns = [
     path('xhr/gas', LiveXhrGasConsumption.as_view(), name='live-xhr-gas'),
     path('xhr/temperature', LiveXhrTemperature.as_view(), name='live-xhr-temperature'),
     path('xhr/tadotemperature', LiveXhrTadoTemperature.as_view(), name='live-xhr-tadotemperature'),
-
     path('archive', Archive.as_view(), name='archive'),
     path('archive/xhr/summary', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
     path('archive/xhr/graphs', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),
