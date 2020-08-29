@@ -14,7 +14,7 @@ from dsmr_frontend.views.generic import ChangelogRedirect, DocsRedirect, Feedbac
     XhrHeader, V4UpgradeRedirect
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 from dsmr_frontend.views.live_graphs import LiveGraphs, LiveXhrElectricityConsumption, LiveXhrGasConsumption, \
-    LiveXhrTemperature
+    LiveXhrTemperature, LiveXhrTadoTemperature
 
 
 app_name = 'frontend'
@@ -27,6 +27,8 @@ urlpatterns = [
     path('xhr/electricity', LiveXhrElectricityConsumption.as_view(), name='live-xhr-electricity'),
     path('xhr/gas', LiveXhrGasConsumption.as_view(), name='live-xhr-gas'),
     path('xhr/temperature', LiveXhrTemperature.as_view(), name='live-xhr-temperature'),
+    path('xhr/tadotemperature', LiveXhrTadoTemperature.as_view(), name='live-xhr-tadotemperature'),
+
     path('archive', Archive.as_view(), name='archive'),
     path('archive/xhr/summary', ArchiveXhrSummary.as_view(), name='archive-xhr-summary'),
     path('archive/xhr/graphs', ArchiveXhrGraphs.as_view(), name='archive-xhr-graphs'),

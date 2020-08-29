@@ -6,6 +6,7 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 from dsmr_frontend.forms import DashboardElectricityConsumptionForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_weather.models.reading import TemperatureReading
+from dsmr_tado.models.reading import TemperatureReading as TadoTemperatureReading
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_frontend.models.message import Notification
 from dsmr_datalogger.models.settings import DataloggerSettings
@@ -159,6 +160,28 @@ class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
             hours=FrontendSettings.get_solo().live_graphs_hours_range
         )
         temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
+
+        for current in temperature:
+            read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
+            data['read_at'].append(read_at)
+            data['degrees_celcius'].append(float(current.degrees_celcius))
+
+        return JsonResponse(data)
+
+
+class LiveXhrTadoTemperature(ConfigurableLoginRequiredMixin, View):
+    """ XHR view for fetching the temperature graph data, in JSON. """
+    def get(self, request):  # noqa: C901
+        data = {
+            'read_at': [],
+            'degrees_celcius': [],
+        }
+
+        # Optimize queries for large datasets by restricting the data to the last week in the first place.
+        base_timestamp = timezone.now() - timezone.timedelta(
+            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        )
+        temperature = TadoTemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by('read_at')
 
         for current in temperature:
             read_at = formats.date_format(timezone.localtime(current.read_at), 'DSMR_GRAPH_LONG_TIME_FORMAT')
