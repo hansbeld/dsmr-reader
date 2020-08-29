@@ -6,8 +6,8 @@ from django.utils import timezone
 from django.conf import settings
 import requests
 
-from dsmr_weather.models.settings import WeatherSettings
-from dsmr_weather.models.reading import TemperatureReading
+from dsmr_tado.models.settings import TadoSettings
+from dsmr_tado.models.reading import TemperatureReading
 
 
 logger = logging.getLogger('dsmrreader')
@@ -58,7 +58,8 @@ def get_temperature_from_api():
         headers = {'Authorization' : 'Bearer ' + token }
         
         dayresponse = requests.get(url, headers=headers)
-        
+        logger.info(dayresponse)
+
     except Exception as error:
         logger.exception(error)
         raise AssertionError(_('Failed to connect to or read from Tado API'))
@@ -69,6 +70,10 @@ def get_temperature_from_api():
 
     dayresponse.json()['measuredData']['insideTemperature']['datapoints']
 
+    hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
+    return TemperatureReading.objects.create(read_at=hour_mark, degrees_celcius=Decimal('12'))
+
+     
     # Find our selected station.
     
     #station_id = WeatherSettings.get_solo().buienradar_station
