@@ -39,7 +39,7 @@ def get_temperature_from_api():
             'password:bidqIb-dyzji7-mocdec',
             'client_secret:wZaRN7rpjn3FoNyF5IFuxg9uMzYJcvOoQ8QWiIqS3hfk6gLhVlG57j5YNoZL2Rtc'}
         response = requests.post(url, data=payload)
-        logger.debug(response)
+        logger.error(response)
         # response = requests.get(settings.DSMRREADER_BUIENRADAR_API_URL)
     except Exception as error:
         logger.exception(error)
@@ -58,7 +58,7 @@ def get_temperature_from_api():
         headers = {'Authorization' : 'Bearer ' + token }
         
         dayresponse = requests.get(url, headers=headers)
-        logger.info(dayresponse)
+        logger.error(dayresponse)
 
     except Exception as error:
         logger.exception(error)
