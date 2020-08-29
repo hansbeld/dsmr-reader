@@ -6,14 +6,14 @@ from django.utils import timezone
 
 
 def migrate_forward(apps, schema_editor):
-    WeatherSettings = apps.get_model('dsmr_weather', 'WeatherSettings')
+    TadoSettings = apps.get_model('dsmr_tado', 'TadoSettings')
     ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
 
-    app_settings, _ = WeatherSettings.objects.get_or_create()  # Ensure we have at least an instance.
+    app_settings, _ = TadoSettings.objects.get_or_create()  # Ensure we have at least an instance.
 
     ScheduledProcess.objects.create(
-        name='Weather update',
-        module=settings.DSMRREADER_MODULE_WEATHER_UPDATE,
+        name='Tado update',
+        module=settings.DSMRREADER_MODULE_TADO_UPDATE,
         active=app_settings.track,
         planned=app_settings.next_sync or timezone.now(),
     )
@@ -21,7 +21,7 @@ def migrate_forward(apps, schema_editor):
 
 def migrate_backward(apps, schema_editor):
     ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE).delete()
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_TADO_UPDATE).delete()
 
 
 class Migration(migrations.Migration):
@@ -29,11 +29,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(migrate_forward, migrate_backward),
         migrations.RemoveField(
-            model_name='weathersettings',
+            model_name='tadosettings',
             name='next_sync',
         ),
     ]
 
     dependencies = [
-        ('dsmr_weather', '0005_weather_refactor_scheduling'),
+        ('dsmr_tado', '0005_tado_refactor_scheduling'),
     ]

@@ -8,8 +8,8 @@ from django.utils import timezone
 
 def migrate_next_sync_setting_retroactive(apps, schema_editor):
     """ Sets the new 'next_sync' setting to the latest temperature reading, if any. """
-    TemperatureReading = apps.get_model('dsmr_weather', 'TemperatureReading')
-    WeatherSettings = apps.get_model('dsmr_weather', 'WeatherSettings')
+    TemperatureReading = apps.get_model('dsmr_tado', 'TemperatureReading')
+    WeatherSettings = apps.get_model('dsmr_tado', 'TadoSettings')
 
     if not TemperatureReading.objects.exists():
         return
@@ -24,7 +24,7 @@ def migrate_next_sync_setting_retroactive(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_weather', '0003_next_sync_setting'),
+        ('dsmr_tado', '0003_next_sync_setting'),
     ]
 
     operations = [

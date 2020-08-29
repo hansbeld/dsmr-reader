@@ -32,5 +32,5 @@ class TadoSettingsAdmin(SingletonModelAdmin):
 def handle_weather_settings_update(sender, instance, **kwargs):
     """ Hook to toggle related scheduled process. """
     ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_WEATHER_UPDATE
+        module=settings.DSMRREADER_MODULE_TADO_UPDATE
     ).update(active=instance.track)

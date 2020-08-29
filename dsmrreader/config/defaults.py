@@ -74,6 +74,7 @@ DSMRREADER_LATEST_VERSION_FILE = 'https://raw.githubusercontent.com/dennissiemen
 DSMRREADER_MODULE_EMAIL_BACKUP = 'dsmr_backup.services.email.run'
 DSMRREADER_MODULE_AUTO_UPDATE_CHECKER = 'dsmr_backend.services.update_checker.run'
 DSMRREADER_MODULE_WEATHER_UPDATE = 'dsmr_weather.services.run'
+DSMRREADER_MODULE_TADO_UPDATE =  'dsmr_tado.services.run'
 DSMRREADER_MODULE_STATS_GENERATOR = 'dsmr_stats.services.run'
 DSMRREADER_MODULE_MINDERGAS_EXPORT = 'dsmr_mindergas.services.run'
 DSMRREADER_MODULE_GENERATE_CONSUMPTION = 'dsmr_consumption.services.run'

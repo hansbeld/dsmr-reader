@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='WeatherSettings',
+            name='TadoSettings',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('track', models.BooleanField(default=False, help_text='Whether we should track and log outside temperatures using an external service. Current service integrated is Buienradar', verbose_name='Track weather')),

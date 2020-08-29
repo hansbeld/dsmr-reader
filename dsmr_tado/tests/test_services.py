@@ -16,7 +16,7 @@ class TestDsmrWeatherServices(TestCase):
 
     def setUp(self):
         WeatherSettings.get_solo()
-        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_TADO_UPDATE)
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1)))
 
     @mock.patch('dsmr_weather.services.get_temperature_from_api')

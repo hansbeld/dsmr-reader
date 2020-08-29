@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.contrib.admin.sites import site
 
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_weather.models.settings import WeatherSettings
+from dsmr_tado.models.settings import TadoSettings
 
 
 class TestSettings(TestCase):
@@ -25,7 +25,7 @@ class TestSettings(TestCase):
         self.assertEqual(self.instance.buienradar_station, 6260)
 
     def test_handle_settings_update_hook(self):
-        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_TADO_UPDATE)
         self.assertFalse(sp.active)
 
         self.instance.track = True

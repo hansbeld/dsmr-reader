@@ -83,4 +83,4 @@ class TadoSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Weather configuration')
+        verbose_name = _('Tado configuration')
